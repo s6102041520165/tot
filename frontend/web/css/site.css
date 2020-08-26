@@ -7,6 +7,12 @@ body {
     background-color: #448aff;
 }
 
+.nav>li>a:hover,
+.nav>li>a:focus {
+    text-decoration: none;
+    background-color: #173d7e;
+}
+
 .navbar-custom .navbar-nav .dropdown-menu {
     background-color: #33aa33;
 }
