@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\NewsContent;
-use backend\models\NewsContentSearch;
+use backend\models\AuthItemChild;
+use backend\models\AuthItemChildSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * NewsContentController implements the CRUD actions for NewsContent model.
+ * AuthItemChildController implements the CRUD actions for AuthItemChild model.
  */
-class NewsContentController extends Controller
+class AuthItemChildController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class NewsContentController extends Controller
     }
 
     /**
-     * Lists all NewsContent models.
+     * Lists all AuthItemChild models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NewsContentSearch();
+        $searchModel = new AuthItemChildSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,29 +45,30 @@ class NewsContentController extends Controller
     }
 
     /**
-     * Displays a single NewsContent model.
-     * @param integer $id
+     * Displays a single AuthItemChild model.
+     * @param string $parent
+     * @param string $child
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($parent, $child)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($parent, $child),
         ]);
     }
 
     /**
-     * Creates a new NewsContent model.
+     * Creates a new AuthItemChild model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new NewsContent();
+        $model = new AuthItemChild();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'parent' => $model->parent, 'child' => $model->child]);
         }
 
         return $this->render('create', [
@@ -76,49 +77,52 @@ class NewsContentController extends Controller
     }
 
     /**
-     * Updates an existing NewsContent model.
+     * Updates an existing AuthItemChild model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $parent
+     * @param string $child
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($parent, $child)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($parent, $child);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'parent' => $model->parent, 'child' => $model->child]);
         }
 
-        return $this->render('แก้ไข', [
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing NewsContent model.
+     * Deletes an existing AuthItemChild model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $parent
+     * @param string $child
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($parent, $child)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($parent, $child)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the NewsContent model based on its primary key value.
+     * Finds the AuthItemChild model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return NewsContent the loaded model
+     * @param string $parent
+     * @param string $child
+     * @return AuthItemChild the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($parent, $child)
     {
-        if (($model = NewsContent::findOne($id)) !== null) {
+        if (($model = AuthItemChild::findOne(['parent' => $parent, 'child' => $child])) !== null) {
             return $model;
         }
 

@@ -1,18 +1,18 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
 use Yii;
-use frontend\models\NewsType;
-use frontend\models\NewsTypeSearch;
+use backend\models\AuthItem;
+use backend\models\AuthItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * NewsTypeController implements the CRUD actions for NewsType model.
+ * AuthItemController implements the CRUD actions for AuthItem model.
  */
-class NewsTypeController extends Controller
+class AuthItemController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -29,11 +29,24 @@ class NewsTypeController extends Controller
         ];
     }
 
-    
+    /**
+     * Lists all AuthItem models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $searchModel = new AuthItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
-     * Displays a single NewsType model.
-     * @param integer $id
+     * Displays a single AuthItem model.
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -45,16 +58,16 @@ class NewsTypeController extends Controller
     }
 
     /**
-     * Creates a new NewsType model.
+     * Creates a new AuthItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new NewsType();
+        $model = new AuthItem();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->name]);
         }
 
         return $this->render('create', [
@@ -63,9 +76,9 @@ class NewsTypeController extends Controller
     }
 
     /**
-     * Updates an existing NewsType model.
+     * Updates an existing AuthItem model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -74,7 +87,7 @@ class NewsTypeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->name]);
         }
 
         return $this->render('update', [
@@ -83,9 +96,9 @@ class NewsTypeController extends Controller
     }
 
     /**
-     * Deletes an existing NewsType model.
+     * Deletes an existing AuthItem model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -96,5 +109,19 @@ class NewsTypeController extends Controller
         return $this->redirect(['index']);
     }
 
-    
+    /**
+     * Finds the AuthItem model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id
+     * @return AuthItem the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = AuthItem::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
 }
