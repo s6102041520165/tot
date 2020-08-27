@@ -40,7 +40,7 @@ class NewsTypeSearch extends NewsType
      */
     public function search($params)
     {
-        $query = NewsType::find();
+        $query = NewsType::find()->where(['mode' => 0]);
 
         // add conditions that should always apply here
 

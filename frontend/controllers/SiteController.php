@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\NewsContent;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -30,7 +31,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
@@ -46,7 +47,7 @@ class SiteController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -111,6 +112,13 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+
+    public function actionView($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('view', ['model' => $model]);
     }
 
     /**
@@ -280,7 +288,7 @@ class SiteController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = NewsType::findOne($id)) !== null) {
+        if (($model = NewsContent::findOne($id)) !== null) {
             return $model;
         }
 

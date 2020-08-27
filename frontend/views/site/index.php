@@ -7,7 +7,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel frontend\models\NewsTypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'หน้าแรก';
+
 ?>
 <div class="news-type-index">
 

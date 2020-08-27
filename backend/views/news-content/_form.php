@@ -1,5 +1,8 @@
 <?php
 
+use dosamigos\ckeditor\CKEditor;
+use frontend\models\NewsType;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -18,7 +21,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content')->widget(CKEditor::class, [
+        'options' => ['rows' => 6],
+        'preset' => 'advanced'
+    ]) ?>
+
+    <?php 
+    $typeItem = ArrayHelper::map(NewsType::find()->all(),'id', 'name_type');
+    ?>
+
+    <?= $form->field($model, 'news_type_id')->dropDownList($typeItem,['prompt' => 'กรุณาเลือกประเภทข่าว'])?>
 
     <div class="form-group">
         <?= Html::submitButton('บันทึก', ['class' => 'btn btn-success']) ?>

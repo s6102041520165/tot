@@ -133,8 +133,14 @@ a.desc:after {
 /* align the logout "link" (button in form) of the navbar */
 
 .nav li>form>button.logout {
-    padding: 15px;
+    padding: 10px;
     border: none;
+    top: 50%;
+    transform: translate(0, 10%)
+}
+
+button.navbar-toggle.collapsed {
+    color: whitesmoke;
 }
 
 @media(max-width:767px) {

@@ -60,8 +60,8 @@ class NewsType extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            BlameableBehavior::className(),
-            TimestampBehavior::className()
+            BlameableBehavior::class,
+            TimestampBehavior::class
         ];
     }
 
@@ -72,7 +72,7 @@ class NewsType extends \yii\db\ActiveRecord
      */
     public function getNewsContents()
     {
-        return $this->hasMany(NewsContent::className(), ['news_type_id' => 'id']);
+        return $this->hasMany(NewsContent::class, ['news_type_id' => 'id']);
     }
     
 }

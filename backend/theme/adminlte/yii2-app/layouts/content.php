@@ -58,7 +58,7 @@ use dmstr\widgets\Alert;
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-        <!-- Home tab content -->
+        <!-- หน้าแรก tab content -->
         <div class="tab-pane" id="control-sidebar-home-tab">
             <h3 class="control-sidebar-heading">Recent Activity</h3>
             <ul class='control-sidebar-menu'>
