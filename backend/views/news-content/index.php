@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\NewsContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'ข่าวสารs';
+$this->title = 'ข่าวสาร';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="news-content-index">
