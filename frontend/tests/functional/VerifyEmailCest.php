@@ -18,7 +18,7 @@ class VerifyEmailCest
     {
         return [
             'user' => [
-                'class' => UserFixture::className(),
+                'class' => UserFixture::class,
                 'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ];
@@ -55,7 +55,7 @@ class VerifyEmailCest
     public function checkSuccessVerification(FunctionalTester $I)
     {
         $I->amOnRoute('site/verify-email', ['token' => '4ch0qbfhvWwkcuWqjN8SWRq72SOw1KYT_1548675330']);
-        $I->canSee('Your email has been confirmed!');
+        $I->canSee('ยืนยันอีเมลสำเร็จ!');
         $I->canSee('Congratulations!', 'h1');
         $I->see('Logout (test.test)', 'form button[type=submit]');
 

@@ -12,6 +12,14 @@ use yii\helpers\Html;
     <meta http-equiv="Content-Type" content="text/html; charset=<?= Yii::$app->charset ?>" />
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style>
+    .btn .btn-primary{
+        display: block;
+        padding: 10;
+        background-color: blueviolet;
+        color: whitesmoke;
+    }
+    </style>
 </head>
 <body>
     <?php $this->beginBody() ?>

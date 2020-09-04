@@ -21,7 +21,7 @@ class NewsContentController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -90,7 +90,7 @@ class NewsContentController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('แก้ไข', [
+        return $this->render('update', [
             'model' => $model,
         ]);
     }

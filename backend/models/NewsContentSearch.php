@@ -18,7 +18,7 @@ class NewsContentSearch extends NewsContent
     {
         return [
             [['id', 'created_by', 'created_at', 'updated_by', 'updated_at', 'news_type_id'], 'integer'],
-            [['title', 'banner', 'description', 'content'], 'safe'],
+            [['title', 'banner', 'content'], 'safe'],
         ];
     }
 
@@ -68,7 +68,6 @@ class NewsContentSearch extends NewsContent
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'banner', $this->banner])
-            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

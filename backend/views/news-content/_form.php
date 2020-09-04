@@ -19,9 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'banner')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'content')->widget(CKEditor::className(), [
+    <?= $form->field($model, 'content')->widget(CKEditor::class, [
         'options' => ['rows' => 6],
         'preset' => 'advanced'
     ]) ?>

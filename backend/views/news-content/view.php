@@ -30,13 +30,30 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'banner:ntext',
-            'description:ntext',
-            'content:ntext',
-            'created_by',
-            'created_at',
-            'updated_by',
-            'updated_at',
-            'news_type_id',
+            [
+                'attribute' => 'content',
+                'format' => 'raw'
+            ],
+            [
+                'attribute' => 'created_by',
+                'value' => function ($model) {
+                    return $model->creator['username'];
+                }
+            ],
+            'created_at:relativeTime',
+            [
+                'attribute' => 'updated_by',
+                'value' => function ($model) {
+                    return $model->editor['username'];
+                }
+            ],
+            'updated_at:relativeTime',
+            [
+                'attribute' => 'news_type_id',
+                'value' => function ($model) {
+                    return $model->newsType['name_type'];
+                },
+            ],
         ],
     ]) ?>
 

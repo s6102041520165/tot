@@ -39,10 +39,10 @@ class NewsContent extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'content'], 'required'],
-            [['banner', 'description', 'content'], 'string'],
+            [['banner', 'content'], 'string'],
             [['created_by', 'created_at', 'updated_by', 'updated_at', 'news_type_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            [['news_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => NewsType::className(), 'targetAttribute' => ['news_type_id' => 'id']],
+            [['news_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => NewsType::class, 'targetAttribute' => ['news_type_id' => 'id']],
         ];
     }
 
@@ -55,7 +55,6 @@ class NewsContent extends \yii\db\ActiveRecord
             'id' => 'รหัส',
             'title' => 'หัวข้อ',
             'banner' => 'แบนเนอร์',
-            'description' => 'รายละเอียด',
             'content' => 'เนื้อหา',
             'created_by' => 'สร้างโดย',
             'created_at' => 'สร้างเมื่อ',
@@ -68,8 +67,8 @@ class NewsContent extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            BlameableBehavior::className(),
-            TimestampBehavior::className()
+            BlameableBehavior::class,
+            TimestampBehavior::class
         ];
     }
     
@@ -80,7 +79,17 @@ class NewsContent extends \yii\db\ActiveRecord
      */
     public function getNewsType()
     {
-        return $this->hasOne(NewsType::className(), ['id' => 'news_type_id']);
+        return $this->hasOne(NewsType::class, ['id' => 'news_type_id']);
+    }
+
+    public function getCreator()
+    {
+        return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    public function getEditor()
+    {
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }
 

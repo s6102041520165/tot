@@ -54,6 +54,6 @@ class SignupCest
         ]);
 
         $I->seeEmailIsSent();
-        $I->see('Thank you for registration. Please check your inbox for verification email.');
+        $I->see('ขอบคุณที่ลงทะเบียน, กรุณายืนยันบัญชีที่อีเมล');
     }
 }
