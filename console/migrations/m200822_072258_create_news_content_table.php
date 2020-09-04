@@ -22,7 +22,6 @@ class m200822_072258_create_news_content_table extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->string(255)->notNull()->notNull(),
             'banner' => $this->text(),
-            'description' => $this->text(),
             'content' => $this->text()->notNull(),
             'created_by' => $this->integer(),
             'created_at' => $this->integer(),

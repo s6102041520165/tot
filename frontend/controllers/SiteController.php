@@ -194,7 +194,7 @@ class SiteController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', 'ส่งลิงค์ยืนยันไปที่อีเมลคุณแล้ว ลองตรวจสอบอีเมลและกดลิงค์ยืนยัน');
 
                 return $this->goHome();
             } else {
@@ -259,7 +259,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Resend verification email
+     * ยืนยันอีเมลใหม่อีกครั้ง
      *
      * @return mixed
      */
@@ -268,7 +268,7 @@ class SiteController extends Controller
         $model = new ResendVerificationEmailForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', 'ส่งลิงค์ยืนยันไปที่อีเมลคุณแล้ว ลองตรวจสอบอีเมลและกดลิงค์ยืนยัน');
                 return $this->goHome();
             }
             Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');

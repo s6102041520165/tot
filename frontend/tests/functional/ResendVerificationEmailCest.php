@@ -41,7 +41,7 @@ class ResendVerificationEmailCest
 
     public function checkPage(FunctionalTester $I)
     {
-        $I->see('Resend verification email', 'h1');
+        $I->see('ยืนยันอีเมลใหม่อีกครั้ง', 'h1');
         $I->see('Please fill out your email. A verification email will be sent there.');
     }
 
@@ -78,6 +78,6 @@ class ResendVerificationEmailCest
             'username' => 'test.test',
             'status' => \common\models\User::STATUS_INACTIVE
         ]);
-        $I->see('Check your email for further instructions.');
+        $I->see('ส่งลิงค์ยืนยันไปที่อีเมลคุณแล้ว ลองตรวจสอบอีเมลและกดลิงค์ยืนยัน');
     }
 }

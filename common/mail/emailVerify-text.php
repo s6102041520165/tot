@@ -5,8 +5,8 @@
 
 $verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['site/verify-email', 'token' => $user->verification_token]);
 ?>
-Hello <?= $user->username ?>,
+สวัสดี <?= $user->username ?>,
 
-Follow the link below to verify your email:
+ต้องการยืนยันอีเมลใช่หรือไม่, ลองกดลิงค์ด้านล่าง:
 
 <?= $verifyLink ?>
