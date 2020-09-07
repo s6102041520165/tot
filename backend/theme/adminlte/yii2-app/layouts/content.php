@@ -35,6 +35,7 @@ use dmstr\widgets\Alert;
         <div class="panel panel-default">
             <div class="panel-body">
                 <?= Alert::widget() ?>
+                
                 <?= $content ?>
             </div>
         </div>

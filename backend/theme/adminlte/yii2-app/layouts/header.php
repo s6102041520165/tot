@@ -1,14 +1,22 @@
 <?php
 
 use yii\helpers\Html;
+use backend\models\Profile;
+
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+
+if (isset(Yii::$app->user->id)) {
+    $profileId = (!empty(Yii::$app->user->identity->profile_id)) ? Yii::$app->user->identity->profile_id : null;
+    $profileImage = (!is_null($profileId)) ? Profile::findOne($profileId)->picture : "uploads/images/nopic.png";
+}
 ?>
+
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->urlManagerFrontend->createUrl(['site/index']), ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -35,7 +43,7 @@ use yii\helpers\Html;
                                     <!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                                            <?= \yii\helpers\Html::img(Yii::$app->urlManagerFrontend->getBaseUrl() . $profileImage, ['class' => 'user-image', 'alt' => 'User Image', 'width' => 160, 'height' => 160]) ?>
                                         </div>
                                         <h4>
                                             Support Team
@@ -48,7 +56,7 @@ use yii\helpers\Html;
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="<?= $directoryAsset ?>/img/user3-128x128.jpg" class="img-circle" alt="user image" />
+                                            <?= \yii\helpers\Html::img(Yii::$app->urlManagerFrontend->getBaseUrl(). "/".  $profileImage, ['class' => 'user-image', 'alt' => 'User Image', 'width' => 128, 'height' => 128]) ?>
                                         </div>
                                         <h4>
                                             AdminLTE Design Team
@@ -222,16 +230,16 @@ use yii\helpers\Html;
 
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                        <?= \yii\helpers\Html::img(Yii::$app->urlManagerFrontend->getBaseUrl(). "/".  $profileImage, ['class' => 'user-image', 'alt' => 'User Image']) ?>
                         <span class="hidden-xs"><?= Yii::$app->user->id ? Yii::$app->user->identity->username : "ไม่ได้เข้าสู่ระบบ" ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                            <?= \yii\helpers\Html::img(Yii::$app->urlManagerFrontend->getBaseUrl(). "/".  $profileImage, ['class' => 'img-circle', 'alt' => 'User Image']) ?>
 
                             <p>
-                                <?= Yii::$app->user->id ? Yii::$app->user->identity->username : "ไม่ได้เข้าสู่ระบบ" ?>
+                                <?= Yii::$app->user->identity->profile_id ? Profile::findOne(Yii::$app->user->id)->f_name . " " . Profile::findOne(Yii::$app->user->id)->l_name : "ไม่ได้เข้าสู่ระบบ" ?>
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
