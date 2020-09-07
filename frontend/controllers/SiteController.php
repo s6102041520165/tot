@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use frontend\models\NewsContent;
@@ -11,6 +12,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Profile;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -18,6 +20,7 @@ use frontend\models\ContactForm;
 use frontend\models\NewsType;
 use frontend\models\NewsTypeSearch;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -174,9 +177,13 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'ขอบคุณที่ลงทะเบียน, กรุณายืนยันบัญชีที่อีเมล');
-            return $this->goHome();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->picture = UploadedFile::getInstance($model, 'picture');
+            if ($model->signup()) {
+                Yii::$app->session->setFlash('success', 'ขอบคุณที่ลงทะเบียน, กรุณายืนยันบัญชีที่อีเมล');
+                return $this->goHome();
+            }
         }
 
         return $this->render('signup', [

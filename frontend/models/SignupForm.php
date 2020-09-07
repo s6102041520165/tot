@@ -1,9 +1,11 @@
 <?php
+
 namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use common\models\Profile;
 
 /**
  * Signup form
@@ -13,7 +15,10 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
+    public $confirm_password;
+    public $f_name;
+    public $l_name;
+    public $picture;
 
     /**
      * {@inheritdoc}
@@ -23,17 +28,20 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'มีชื่อผู้ใช้อยู่แล้ว กรุณาลองชื่ออื่น'],
             ['username', 'string', 'min' => 2, 'max' => 255],
-
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            [['f_name','l_name'], 'required'], 
+            [['f_name', 'l_name'], 'string', 'max' => 100],
+            [['picture'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'มีคนใช้อีเมลนี้แล้ว'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            ['confirm_password', 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'message' => "รหัสผ่านไม่ตรงกัน"],
         ];
     }
 
@@ -47,15 +55,38 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
+        $profile_id = $this->createProfile();
+        $user->profile_id = $profile_id;
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
         return $user->save() && $this->sendEmail($user);
+    }
 
+    public function createProfile()
+    {
+        $profile = new Profile();
+        $profile->setAttribute('f_name', $this->f_name);
+        $profile->setAttribute('l_name', $this->l_name);
+        $pictureName = $this->upload();
+        $profile->setAttribute('picture', $pictureName);
+        $profile->save();
+        return $profile->id;
+    }
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            $randomImage = time();
+            $this->picture->saveAs('@webroot/uploads/images/' . $randomImage . '.' . $this->picture->extension);
+            return "uploads/images/" . $randomImage . '.' . $this->picture->extension;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -81,7 +112,11 @@ class SignupForm extends Model
         return [
             'username' => 'ชื่อผู้ใช้',
             'password' => 'รหัสผ่าน',
-            'email' => 'อีเมล'
+            'email' => 'อีเมล',
+            'confirm_password' => 'ยืนยันรหัสผ่าน',
+            'f_name' => 'ชื่อ',
+            'l_name' => 'นามสกุล',
+            'picture' => 'รูปโปรไฟล์',
         ];
     }
 }

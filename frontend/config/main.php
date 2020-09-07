@@ -33,7 +33,7 @@ return [
                 ],
             ],
         ],
-        
+
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -45,6 +45,13 @@ return [
             ],
         ],
         */
+        'urlManagerBackend' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/tot/admin',
+            'scriptUrl' => '/tot/admin/index.php',
+            'enablePrettyUrl' => false,
+            'showScriptName' => true,
+        ],
     ],
     'params' => $params,
 ];

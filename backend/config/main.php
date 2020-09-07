@@ -11,10 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'homeUrl' => '/tot/admin',
     'modules' => [],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'baseUrl' => '/tot/admin'
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -40,10 +42,10 @@ return [
         'view' => [
             'theme' => [
                 'pathMap' => [
-                   '@backend/views' => '@backend/theme/adminlte/yii2-app'
+                    '@backend/views' => '@backend/theme/adminlte/yii2-app'
                 ],
             ],
-       ],
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -52,6 +54,13 @@ return [
             ],
         ],
         */
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/tot',
+            'scriptUrl' => '/tot/index.php',
+            'enablePrettyUrl' => false,
+            'showScriptName' => true,
+        ],
     ],
     'params' => $params,
 ];
