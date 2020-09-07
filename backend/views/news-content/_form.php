@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'banner')->textarea(['rows' => 6]) ?>
+    <?= $form->field($imageFile, 'imageFile')->fileInput(['label' => 'แบนเนอร์']) ?>
 
     <?= $form->field($model, 'content')->widget(CKEditor::class, [
         'options' => ['rows' => 6],

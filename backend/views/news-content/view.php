@@ -29,7 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'banner:ntext',
+            [
+                'attribute' => 'banner',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    return Html::img(Yii::$app->urlManagerFrontend->getBaseUrl(). "/".  $data->banner, ['class' => 'img-rounded', 'alt' => 'User Image', 'width' => 128, 'height' => 128]);
+                }
+            ],
             [
                 'attribute' => 'content',
                 'format' => 'raw'

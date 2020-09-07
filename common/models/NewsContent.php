@@ -38,11 +38,11 @@ class NewsContent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
+            [['title', 'content', 'news_type_id'], 'required'],
             [['banner', 'content'], 'string'],
             [['created_by', 'created_at', 'updated_by', 'updated_at', 'news_type_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            [['news_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => NewsType::class, 'targetAttribute' => ['news_type_id' => 'id']],
+            [['news_type_id'], 'exist', 'skipOnError' => false, 'targetClass' => NewsType::class, 'targetAttribute' => ['news_type_id' => 'id']],
         ];
     }
 

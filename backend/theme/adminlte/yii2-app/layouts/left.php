@@ -57,6 +57,7 @@ if (isset(Yii::$app->user->id)) {
                         'url' => '#',
                         'items' => [
                             ['label' => 'จัดการสิทธิ์', 'icon' => 'circle', 'url' => ['/auth-item']],
+                            ['label' => 'ผู้ใช้งานระบบ', 'icon' => 'circle', 'url' => ['/user']],
                         ]
                     ],
                     //['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],

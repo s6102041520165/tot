@@ -12,15 +12,16 @@ class Uploaded extends Model
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
     
     public function upload()
     {
+        $file_name = time();
         if ($this->validate()) {
-            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
+            $this->imageFile->saveAs('@frontend/web/uploads/images/' . $file_name . '.' . $this->imageFile->extension);
+            return '/uploads/images/' . $file_name . '.' . $this->imageFile->extension;
         } else {
             return false;
         }
