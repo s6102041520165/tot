@@ -82,8 +82,8 @@ class SignupForm extends Model
     {
         if ($this->validate()) {
             $randomImage = time();
-            $this->picture->saveAs('@webroot/uploads/images/' . $randomImage . '.' . $this->picture->extension);
-            return "uploads/images/" . $randomImage . '.' . $this->picture->extension;
+            $this->picture->saveAs('@webroot/uploads/images/profile/' . $randomImage . '.' . $this->picture->extension);
+            return "uploads/images/profile/" . $randomImage . '.' . $this->picture->extension;
         } else {
             return false;
         }

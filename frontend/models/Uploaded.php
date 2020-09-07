@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
@@ -20,8 +20,8 @@ class Uploaded extends Model
     {
         $file_name = time();
         if ($this->validate()) {
-            $this->imageFile->saveAs('@frontend/web/uploads/images/news-content/' . $file_name . '.' . $this->imageFile->extension);
-            return '/uploads/images/news-content/' . $file_name . '.' . $this->imageFile->extension;
+            $this->imageFile->saveAs('@frontend/web/uploads/images/profile/' . $file_name . '.' . $this->imageFile->extension);
+            return '/uploads/images/profile/' . $file_name . '.' . $this->imageFile->extension;
         } else {
             return false;
         }

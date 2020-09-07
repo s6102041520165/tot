@@ -12,13 +12,14 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use common\models\Profile;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\NewsType;
 use frontend\models\NewsTypeSearch;
+use frontend\models\Profile as ModelsProfile;
+use frontend\models\Uploaded;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
@@ -43,7 +44,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'update-profile'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -188,6 +189,31 @@ class SiteController extends Controller
 
         return $this->render('signup', [
             'model' => $model,
+        ]);
+    }
+
+
+    public function actionUpdateProfile()
+    {
+        $model = ModelsProfile::findOne(Yii::$app->user->identity->profile_id);
+        $imageFile = new Uploaded();
+        if ($model->load(Yii::$app->request->post()) && $imageFile->load(Yii::$app->request->post())) {
+            $imageFile->imageFile = UploadedFile::getInstance($imageFile, 'imageFile');
+            if ($imageFile->imageFile) {
+                $getFileName = $imageFile->upload();
+                if ($getFileName != false) {
+                    $model->picture = $getFileName;
+                }
+            }
+
+            if ($model->save()){
+                Yii::$app->session->setFlash('success', 'แก้ไขข้อมูลสำเร็จ');
+                return $this->goHome();
+            }
+        }
+        return $this->render('update-profile', [
+            'model' => $model,
+            'imageFile' => $imageFile,
         ]);
     }
 
