@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\Activities */
 
 $this->title = 'เพิ่มกิจกรรม';
-$this->params['breadcrumbs'][] = ['label' => 'Activities', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'กิจกรรม', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activities-create">
