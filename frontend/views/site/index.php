@@ -17,7 +17,7 @@ $this->title = 'หน้าแรก';
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'itemOptions' => ['class'=>'panel panel-info'],
+        'itemOptions' => ['class'=>'panel panel-info animate'],
         'itemView' => '_item_news'
     ]) ?>
 

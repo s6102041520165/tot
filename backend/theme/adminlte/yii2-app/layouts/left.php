@@ -18,7 +18,6 @@ if (isset(Yii::$app->user->id)) {
             </div>
             <div class="pull-left info">
                 <p><?= Yii::$app->user->identity->profile_id ? Profile::findOne(Yii::$app->user->id)->f_name . " " . Profile::findOne(Yii::$app->user->id)->l_name : "ไม่ได้เข้าสู่ระบบ" ?></p>
-                <p><?= $sourcePath ?></p>
 
                 <a href="#"><i class="fa fa-circle text-green"></i> ออนไลน์</a>
             </div>

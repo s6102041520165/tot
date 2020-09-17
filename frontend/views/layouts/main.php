@@ -23,6 +23,11 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style>
+        *,p,table,h1,h2,h3,h4,h5{
+            font-family: kanit;
+        }
+    </style>
 </head>
 
 <body>
@@ -82,7 +87,7 @@ AppAsset::register($this);
         <div class="container">
             <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-            <p class="pull-right">จัดทำโดยใคร</p>
+            <p class="pull-right">จัดทำโดยใคร <?=Html::a('BackYard', Yii::$app->urlManagerBackend->createUrl(['site/index']), $options = [])?></p>
         </div>
     </footer>
 

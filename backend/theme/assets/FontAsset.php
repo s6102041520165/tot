@@ -1,20 +1,18 @@
 <?php
 
-namespace backend\assets;
-
-use yii\web\AssetBundle;
+namespace backend\theme\assets;
 
 
 /**
  * Main backend application asset bundle.
  */
-class AppAsset extends AssetBundle
+class FontAsset extends \backend\assets\AppAsset
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        '//fonts.googleapis.com/css2?family=Kanit:wght@100&display=swap'
+        '//fonts.googleapis.com/css2?family=Kanit:wght@400&display=swap'
     ];
     public $js = [
     ];
