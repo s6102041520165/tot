@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'gallery')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'gallery')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('บันทึก', ['class' => 'btn btn-success']) ?>
