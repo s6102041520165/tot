@@ -50,6 +50,7 @@ if (isset(Yii::$app->user->id)) {
                             ['label' => 'ข่าวสาร', 'icon' => 'circle', 'url' => ['/news-content'],],
                         ]
                     ],
+                    ['label' => 'กิจกรรม', 'icon' => 'image', 'url' => ['/activities']],
                     [
                         'label' => 'ผู้ใช้งานระบบ',
                         'icon' => 'user',

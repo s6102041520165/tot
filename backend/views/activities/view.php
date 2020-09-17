@@ -4,14 +4,16 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\NewsType */
+/* @var $model backend\models\Activities */
 
-$this->title = $model->name_type;
-$this->params['breadcrumbs'][] = ['label' => 'หมวดหมู่ข่าวสาร', 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Activities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="news-type-view">
+<div class="activities-view">
+
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('แก้ไข', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -28,17 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'name_type',
-            'created_at:relativeTime',
-            'updated_at:relativeTime',
+            'title',
+            'description:ntext',
+            'gallery:ntext',
+            'created_at',
+            'updated_at',
             'created_by',
             'updated_by',
-            [
-                'attribute' => 'mode',
-                'value' => function ($data) {
-                    return $data->mode === 0 ? "แสดง" : "ร่าง";
-                }
-            ]
         ],
     ]) ?>
 

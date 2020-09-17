@@ -3,6 +3,6 @@
     "description": "tot hotreload script",
     "version": "1.2.3",
     "scripts": {
-        "start": " browser-sync start --proxy 'localhost/tot' --files 'frontend/views/**/*' 'frontend/controllers/**/*' 'frontend/models/**/*' 'frontend/web/css/*.css' 'backend/views/**/*' 'backend/controllers/**/*' 'backend/models/**/*' 'backend/web/css/*.css' "
+        "start": " browser-sync start --proxy 'localhost/tot' --files 'frontend/views/**/*' 'frontend/controllers/**/*' 'frontend/models/**/*' 'frontend/web/css/*.css' 'backend/views/**/*' 'backend/theme/**/*' 'backend/controllers/**/*' 'backend/models/**/*' 'backend/web/css/*.css' "
     }
 }
