@@ -39,8 +39,8 @@ class Activities extends \yii\db\ActiveRecord
             [['description', 'gallery'], 'string'],
             [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['title'], 'string', 'max' => 100],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -50,14 +50,22 @@ class Activities extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'gallery' => 'Gallery',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
+            'id' => 'รหัส',
+            'title' => 'ชื่ออัลบัม',
+            'description' => 'คำอธิบายอัลบัม',
+            'gallery' => 'แกลอรี',
+            'created_at' => 'สร้างเมื่อ',
+            'updated_at' => 'แก้ไขเมื่อ',
+            'created_by' => 'สร้างโดย',
+            'updated_by' => 'แก้ไขโดย',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            BlameableBehavior::class,
+            TimestampBehavior::class
         ];
     }
 
@@ -68,7 +76,7 @@ class Activities extends \yii\db\ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     /**
@@ -78,6 +86,6 @@ class Activities extends \yii\db\ActiveRecord
      */
     public function getUpdatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 }
