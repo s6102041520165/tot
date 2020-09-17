@@ -72,7 +72,7 @@ AppAsset::register($this);
                 <div class="col-lg-3">
                     <?= $this->render('left'); ?>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 animate-right">
                     <?= Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                     ]) ?>

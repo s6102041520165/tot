@@ -161,7 +161,7 @@ button.navbar-toggle.collapsed {
     outline: none;
 }
 
-.animate {
+.animate-right {
     position: relative;
     right: -100px;
     -webkit-animation: slide 1s forwards;

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="news-type-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>โพสต์นี้สร้างเมื่อ : <?= Yii::$app->formatter->asRelativeTime($model->created_at) ?></p>
+    <p><span class="badge badge" style="background-color:yellowgreen;">เผยแพร่เมื่อ : <?= Yii::$app->formatter->asRelativeTime($model->created_at) ?></span></p>
 
     <p><?= $model->content ?></p>
     <p></p>

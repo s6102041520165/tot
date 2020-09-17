@@ -1,4 +1,4 @@
-<div class="panel panel-info">
+<div class="panel panel-info animate-right">
     <div class="panel-heading">
         สถิติการใช้งานเว็บไซต์
     </div>
