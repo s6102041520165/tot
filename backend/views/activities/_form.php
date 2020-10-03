@@ -16,10 +16,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'gallery')->fileInput() ?>
+    <?= $form->field($imageFiles, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+
 
     <div class="form-group">
-        <?= Html::submitButton('บันทึก', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

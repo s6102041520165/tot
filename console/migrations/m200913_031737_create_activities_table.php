@@ -23,7 +23,7 @@ class m200913_031737_create_activities_table extends Migration
             'updated_by' => $this->integer()->notNull()
         ]);
 
-        $this->addForeignKey(
+       /* $this->addForeignKey(
             'fk-activities-created_by',
             '{{%activities}}',
             'created_by',
@@ -39,7 +39,7 @@ class m200913_031737_create_activities_table extends Migration
             'user',
             'id',
             'CASCADE'
-        );
+        );*/
     }
 
     /**
@@ -47,14 +47,14 @@ class m200913_031737_create_activities_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey(
+        /*$this->dropForeignKey(
             'fk-activities-created_by',
             '{{%activities}}'
         );
         $this->dropForeignKey(
             'fk-activities-updated_by',
             '{{%activities}}'
-        );
+        );*/
         $this->dropTable('{{%activities}}');
     }
 }

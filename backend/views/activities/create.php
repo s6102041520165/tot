@@ -11,8 +11,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activities-create">
 
+    <h1><?= Html::encode($this->title) ?></h1>
+
     <?= $this->render('_form', [
         'model' => $model,
+        'imageFiles' => $imageFiles
     ]) ?>
 
 </div>

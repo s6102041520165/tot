@@ -37,12 +37,10 @@ class Activities extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['title'], 'required'],
             [['description', 'gallery'], 'string'],
             [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['title'], 'string', 'max' => 100],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -66,8 +64,8 @@ class Activities extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            BlameableBehavior::class,
-            TimestampBehavior::class
+            BlameableBehavior::className(),
+            TimestampBehavior::className()
         ];
     }
 

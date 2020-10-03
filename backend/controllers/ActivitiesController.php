@@ -5,9 +5,11 @@ namespace backend\controllers;
 use Yii;
 use backend\models\Activities;
 use backend\models\ActivitiesSearch;
+use backend\models\UploadForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ActivitiesController implements the CRUD actions for Activities model.
@@ -65,12 +67,25 @@ class ActivitiesController extends Controller
     public function actionCreate()
     {
         $model = new Activities();
+        $uploadForms = new UploadForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $uploadForms->imageFiles = UploadedFile::getInstances($uploadForms, 'imageFiles');
+            if ($uploadForms->imageFiles) {
+                $getFileName = $uploadForms->upload();
+                if ($getFileName != false) {
+                    $model->setAttribute('gallery', $getFileName);
+                }
+                $model->save();
+                var_dump($model->getErrors());
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
+            'imageFiles' => $uploadForms,
             'model' => $model,
         ]);
     }
