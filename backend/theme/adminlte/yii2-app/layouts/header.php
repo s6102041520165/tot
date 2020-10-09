@@ -162,7 +162,7 @@ if (isset(Yii::$app->user->id)) {
                             <?= \yii\helpers\Html::img(Yii::$app->urlManagerFrontend->getBaseUrl(). "/".  $profileImage, ['class' => 'img-circle', 'alt' => 'User Image']) ?>
 
                             <p>
-                                <?= Yii::$app->user->identity->profile_id ? Profile::findOne(Yii::$app->user->id)->f_name . " " . Profile::findOne(Yii::$app->user->id)->l_name : "ไม่ได้เข้าสู่ระบบ" ?>
+                                <?= Yii::$app->user->identity->profile_id ? Profile::findOne($profileId)->f_name . " " . Profile::findOne($profileId)->l_name : "ไม่ได้เข้าสู่ระบบ" ?>
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>

@@ -13,22 +13,22 @@ class m200827_172825_init_rbac extends Migration
 
         // add "createPost" permission
         $createPost = $auth->createPermission('createPost');
-        $createPost->description = 'Create a post';
+        $createPost->description = 'สร้างโพสต์';
         $auth->add($createPost);
 
         // view "viewPost" permission
         $viewPost = $auth->createPermission('viewPost');
-        $viewPost->description = 'View a post';
+        $viewPost->description = 'ดูโพสต์';
         $auth->add($viewPost);
 
         // view "deletePost" permission
         $deletePost = $auth->createPermission('deletePost');
-        $deletePost->description = 'Delete a post';
+        $deletePost->description = 'ลบโพสต์';
         $auth->add($deletePost);
 
         // add "updatePost" permission
         $updatePost = $auth->createPermission('updatePost');
-        $updatePost->description = 'Update post';
+        $updatePost->description = 'แก้ไขโพสต์';
         $auth->add($updatePost);
 
         // add "author" role and give this role the "createPost" permission

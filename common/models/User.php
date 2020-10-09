@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use backend\models\Profile as ModelsProfile;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -217,5 +218,9 @@ class User extends ActiveRecord implements IdentityInterface
             'username' => 'ชื่อผู้ใช้',
             'email' => 'อีเมล',
         ];
+    }
+    public function getProfile()
+    {
+        return $this->hasOne(ModelsProfile::class, ['id' => 'profile_id']);
     }
 }

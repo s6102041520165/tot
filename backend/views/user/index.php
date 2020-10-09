@@ -14,9 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,15 +26,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            //'email:email',
+            'email:email',
             //'status',
-            //'created_at',
+            'created_at:relativeTime',
             //'updated_at',
             //'verification_token',
             //'profile_id',
+            [
+                'attribute' => 'profile_id',
+                'value' => function($model){
+                    return isset($model->profile['id'])? $model->profile['f_name']: "ไม่ได้ตั้งชื่อ";
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

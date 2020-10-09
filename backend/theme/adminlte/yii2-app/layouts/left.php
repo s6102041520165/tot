@@ -17,7 +17,7 @@ if (isset(Yii::$app->user->id)) {
                 <?= \yii\helpers\Html::img(Yii::$app->urlManagerFrontend->getBaseUrl(). "/".  $profileImage, ['class' => 'img-circle', 'alt' => 'User Image']) ?>
             </div>
             <div class="pull-left info">
-                <p><?= Yii::$app->user->identity->profile_id ? Profile::findOne(Yii::$app->user->id)->f_name . " " . Profile::findOne(Yii::$app->user->id)->l_name : "ไม่ได้เข้าสู่ระบบ" ?></p>
+                <p><?= Yii::$app->user->identity->profile_id ? Profile::findOne($profileId)->f_name . " " . Profile::findOne($profileId)->l_name : "ไม่ได้เข้าสู่ระบบ" ?></p>
 
                 <a href="#"><i class="fa fa-circle text-green"></i> ออนไลน์</a>
             </div>
