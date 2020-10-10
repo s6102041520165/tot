@@ -7,15 +7,13 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\ActivitiesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Activities';
+$this->title = 'กิจกรรม';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="activities-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Activities', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('เพิ่มกิจกรรม', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -30,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'description:ntext',
-            'gallery:ntext',
-            'created_at',
+            //'gallery:ntext',
+            'created_at:relativeTime',
             //'updated_at',
             //'created_by',
             //'updated_by',

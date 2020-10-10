@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'username',
             'email:email',
             //'status',
@@ -35,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'profile_id',
                 'value' => function($model){
-                    return isset($model->profile['id'])? $model->profile['f_name']: "ไม่ได้ตั้งชื่อ";
+                    return isset($model->profile['id'])? "{$model->profile['f_name']} {$model->profile['l_name']}": "ไม่ได้ตั้งชื่อ";
                 }
             ],
 
