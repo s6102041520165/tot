@@ -64,8 +64,8 @@ class Activities extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            BlameableBehavior::className(),
-            TimestampBehavior::className()
+            BlameableBehavior::class,
+            TimestampBehavior::class,
         ];
     }
 

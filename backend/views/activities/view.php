@@ -7,20 +7,19 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Activities */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Activities', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'กิจกรรม', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="activities-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('แก้ไข', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('ลบ', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'คุณแน่ใจหรือไม่ที่จะลบรายการนี้',
                 'method' => 'post',
             ],
         ]) ?>
@@ -32,11 +31,34 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'description:ntext',
-            'gallery:ntext',
-            'created_at',
-            'updated_at',
-            'created_by',
-            'updated_by',
+            [
+                'attribute' => 'gallery',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    $images = explode(",", $data->gallery);
+                    $appendHtml = null;
+                    
+                    $imagePath = Yii::$app->urlManagerFrontend->getBaseUrl();
+                    foreach ($images as $image) {
+                        $appendHtml .= "<img style='max-width:500px;' src='{$imagePath}{$image}' class='thumbnail'/>";
+                    }
+                    return "<div style='display:flex;flex-wrap:wrap;justify-content:space-between'>".$appendHtml."</div>";
+                }
+            ],
+            'created_at:relativeTime',
+            'updated_at:relativeTime',
+            [
+                'attribute' => 'created_by',
+                'value' => function ($data) {
+                    return $data->createdBy['username'];
+                },
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => function ($data) {
+                    return $data->updatedBy['username'];
+                },
+            ],
         ],
     ]) ?>
 

@@ -40,4 +40,11 @@ class UploadForm extends Model
             return false;
         }
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'imageFiles' => 'รูปภาพ'
+        ];
+    }
 }
