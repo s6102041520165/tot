@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -84,9 +84,17 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        $auth = Yii::$app->authManager;
         $model = $this->findModel($id);
+        $permission = $this->findPermissions();
+        $model->roles = ($permission)? $permission: null;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            foreach ($model->roles as $val) {
+                $permissionForUser = Yii::$app->authManager->getPermission($val);
+                $auth->assign($permissionForUser, Yii::$app->user->id);
+            }
+            //Yii::$app->authManager->getPermission()
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -123,5 +131,22 @@ class UserController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Find Permission by User ID
+     */
+    protected function findPermissions(){
+        $userId = Yii::$app->user->identity->id;
+        $permission = array();
+        
+        if($userId){
+            $datas= Yii::$app->authManager->getPermissionsByUser($userId);
+            foreach($datas as $data){
+                array_push($permission,$data->name);
+            }
+            //var_dump($model);
+        }
+        return $permission;
     }
 }

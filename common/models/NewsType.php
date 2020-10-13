@@ -74,5 +74,15 @@ class NewsType extends \yii\db\ActiveRecord
     {
         return $this->hasMany(NewsContent::class, ['news_type_id' => 'id']);
     }
+
+    public function getCreator()
+    {
+        return $this->hasOne(User::class, ['id' => 'created_by']);
+    }
+
+    public function getEditor()
+    {
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
+    }
     
 }

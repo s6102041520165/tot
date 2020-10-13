@@ -31,8 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'name_type',
             'created_at:relativeTime',
             'updated_at:relativeTime',
-            'created_by',
-            'updated_by',
+            [
+                'attribute' => 'created_by',
+                'value' => function ($data) {
+                    return $data->creator['username'];
+                }
+            ],
+            [
+                'attribute' => 'updated_by',
+                'value' => function ($data) {
+                    return $data->editor['username'];
+                }
+            ],
             [
                 'attribute' => 'mode',
                 'value' => function ($data) {
