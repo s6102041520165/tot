@@ -41,6 +41,7 @@ if (isset(Yii::$app->user->id)) {
                 'items' => [
                     ['label' => 'เมนู', 'options' => ['class' => 'header']],
                     ['label' => 'แดชบอร์ด', 'icon' => 'dashboard', 'url' => ['/']],
+                    ['label' => 'เกี่ยวกับ', 'icon' => 'bank', 'url' => ['/about']],
                     [
                         'label' => 'ข่าวสาร',
                         'icon' => 'newspaper-o',

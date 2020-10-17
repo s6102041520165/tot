@@ -11,11 +11,8 @@ use yii\widgets\Pjax;
 $this->title = 'เกี่ยวกับ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="about-index">
     <?php Pjax::begin(); ?>
-    <?php //echo $this->render('_search', ['model' => $searchModel]); 
-    ?>
 
     <div class="col-lg-12">
 
@@ -31,14 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 ListView::widget([
                     'dataProvider' => $dataProvider,
                     'options' => ['class' => 'img-container'],
-                    'itemOptions' => ['class' => 'container-thumbnail items'],
+                    'itemOptions' => ['class' => 'item-thumbnail'],
                     'itemView' => function ($model, $key, $index, $widget) {
                         $imageUrl = Yii::getAlias('@web') . $model->thumbnail;
                         $overlayImage = "<div class=\"overlay\">
-                                            <div class=\"text\">{$model->name}</div>
+                                            <div class=\"text\">
+                                                {$model->name}
+                                            </div>
                                         </div>";
                         //Html::a(Html::img($imageUrl,['class' => 'img']), ['view-about', 'id' => $model->id])
-                        return Html::a(Html::img($imageUrl, ['class' => 'image']) . $overlayImage, ['view-about', 'id' => $model->id]);
+                        return Html::a(Html::img($imageUrl, ['class' => 'image']) . $overlayImage, ['view', 'id' => $model->id]);
                     },
                     'layout' => '{items}'
                 ])
@@ -49,16 +48,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php Pjax::end(); ?>
     <?php $css = <<<CSS
-    .container-thumbnail {
+    .img-container{
         display:flex;
-        position: relative;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-around;
+        flex-direction: row;
+    }
+    .item-thumbnail {
+        max-width:500px;
+        margin: 10px;
+        position: relative;
     }
 
-    .items{
-        width:300px;
-    }
 
     .image {
         display: block;
@@ -75,21 +76,22 @@ $this->params['breadcrumbs'][] = $this->title;
         background-color: gray;
         overflow: hidden;
         width: 100%;
-        height: 0;
+        height: 80px;
         transition: .5s ease;
         opacity:0.8;
     }
 
-    .container-thumbnail:hover .overlay {
+    .item-thumbnail:hover .overlay {
         height: 100%;
     }
 
     .text {
-        white-space: wrap; 
+        white-space: nowrap; 
         color: white;
         font-size: 20px;
         position: absolute;
         overflow: hidden;
+        text-overflow: ellipsis;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);

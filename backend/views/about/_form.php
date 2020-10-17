@@ -6,17 +6,19 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Activities */
+/* @var $model backend\models\About */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="activities-form">
+<div class="about-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($imageFile, 'imageFile')->fileInput()->label('รูปภาพ')?>
 
-    <?= $form->field($model, 'description')->widget(CKEditor::class, [
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'content')->widget(CKEditor::class, [
         'options' => ['rows' => 6],
         'preset' => 'full',
         'clientOptions' => [
@@ -33,13 +35,10 @@ use yii\widgets\ActiveForm;
             ], */
         ],
 
-    ])  ?>
-
-    <?= $form->field($imageFiles, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
-
+    ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('บันทึก', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

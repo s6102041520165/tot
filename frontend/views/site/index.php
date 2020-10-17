@@ -21,7 +21,8 @@ $this->title = 'หน้าแรก';
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'panel panel-info'],
-        'itemView' => '_item_news'
+        'itemView' => '_item_news',
+        'layout' => '{items}'
     ]) ?>
 
     <div class="row">
@@ -35,9 +36,6 @@ $this->title = 'หน้าแรก';
                     <?php
                     $dataProvider = new ActiveDataProvider([
                         'query' => Activities::find(),
-                        'pagination' => [
-                            'pageSize' => 5,
-                        ],
                     ]);
                     ?>
 
@@ -49,7 +47,7 @@ $this->title = 'หน้าแรก';
                             'itemView' => function ($model, $key, $index, $widget) {
                                 return Html::a($model->title, ['/activities/view', 'id' => $model->id]);
                             },
-                            'layout' => '{items}'
+                            'layout' => '<div>{items}</div>'
                         ])
                     ?>
                 </div>

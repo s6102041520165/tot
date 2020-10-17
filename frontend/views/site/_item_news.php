@@ -14,7 +14,7 @@ use yii\widgets\ListView;
     $dataProvider = new ActiveDataProvider([
         'query' => NewsContent::find()->where(['=', 'news_type_id', $model->id]),
         'pagination' => [
-            'pageSize' => 10,
+            'pageSize' => 5,
         ],
     ]);
     ?>
@@ -26,7 +26,8 @@ use yii\widgets\ListView;
             'itemOptions' => ['class'=>'list-group-item'],
             'itemView' => function ($model, $key, $index, $widget) {
                 return Html::a($model->title, ['/site/view', 'id' => $model->id]);
-            }
+            },
+            'layout' => '{items} {pager}'
         ])
     ?>
 </div>

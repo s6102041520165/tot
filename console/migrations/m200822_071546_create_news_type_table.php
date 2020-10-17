@@ -27,7 +27,44 @@ class m200822_071546_create_news_type_table extends Migration
             'updated_by' => $this->integer(),
             'mode' => $this->integer()->defaultValue(0)
         ],$tableOptions);
+        
+        $this->insert('news_type', [
+            'id' => 1,
+            'name_type' => 'ข่าวประชาสัมพันธ์องค์กร',
+            'created_at' => time(),
+            'updated_at' => time(),
+            'created_by' => 1,
+            'updated_by' => 1
+        ]);
+        $this->insert('news_type',[
+            'id' => 2,
+            'name_type' => 'ข่าวทั่วไป',
+            'created_at' => time(),
+            'updated_at' => time(),
+            'created_by' => 1,
+            'updated_by' => 1
+        ]);
+
+        $this->insert('news_type',[
+            'id' => 3,
+            'name_type' => 'ข่าวธุรกิจ',
+            'created_at' => time(),
+            'updated_at' => time(),
+            'created_by' => 1,
+            'updated_by' => 1
+        ]);
+
+        $this->insert('news_type',[
+            'id' => 4,
+            'name_type' => 'ข่าว CSR',
+            'created_at' => time(),
+            'updated_at' => time(),
+            'created_by' => 1,
+            'updated_by' => 1
+        ]);
     }
+
+    
 
     /**
      * {@inheritdoc}

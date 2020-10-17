@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use phpDocumentor\Reflection\Types\String_;
 use Yii;
 use yii\base\Model;
 
@@ -15,13 +16,15 @@ class Uploaded extends Model
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
-    
-    public function upload()
+    /**
+    > $location is retrieve directory
+     */
+    public function upload(String $location)
     {
         $file_name = time();
         if ($this->validate()) {
-            $this->imageFile->saveAs('@frontend/web/uploads/images/news-content/' . $file_name . '.' . $this->imageFile->extension);
-            return '/uploads/images/news-content/' . $file_name . '.' . $this->imageFile->extension;
+            $this->imageFile->saveAs("@frontend/web/uploads/images/{$location}/" . $file_name . '.' . $this->imageFile->extension);
+            return "/uploads/images/{$location}/" . $file_name . '.' . $this->imageFile->extension;
         } else {
             return false;
         }
