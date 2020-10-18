@@ -23,6 +23,9 @@ button.navbar-toggle {
 
 .banner {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../uploads/icons/pt.jpg");
      /* Full height */
     height: 100vh;
@@ -32,6 +35,17 @@ button.navbar-toggle {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.banner h1{
+    font-size:200px;
+    color: whitesmoke;
+    border-bottom: 5px solid whitesmoke;
+}
+.banner h2{
+    text-align: center;
+    font-size:100px;
+    color: whitesmoke;
 }
 
 

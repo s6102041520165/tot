@@ -87,6 +87,10 @@ AppAsset::register($this);
         ?>
 
         <div class="banner" id="banner">
+            <div>
+                <h1>TOT</h1>
+                <h2>พัทลุง</h2>
+            </div>
 
         </div>
         <div class="container">
