@@ -3,42 +3,69 @@ body {
     height: 100%;
 }
 
-.navbar-custom {
+.bg-blue {
     background-color: #448aff;
+    color:white;
 }
-
+.bg-transparent {
+    background-color: transparent;
+    color: white;
+}
 .nav>li>a:hover,
 .nav>li>a:focus {
     text-decoration: none;
     background-color: #173d7e;
 }
 
-.navbar-custom .navbar-nav .dropdown-menu {
-    background-color: #33aa33;
+button.navbar-toggle {
+    background: url("../uploads/icons/apps-24px.svg") no-repeat 100% 100%;
 }
 
-.navbar-custom .navbar-nav .dropdown-menu>li>a {
+.banner {
+    position: relative;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../uploads/icons/pt.jpg");
+     /* Full height */
+    height: 100vh;
+    width:100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.bg-blue .navbar-nav .dropdown-menu, .bg-transparent .navbar-nav .dropdown-menu {
+    background-color: whitesmoke;
+}
+
+.bg-blue .navbar-nav .dropdown-menu>li>a,.bg-transparent .navbar-nav .dropdown-menu>li>a{
     color: #448aff;
 }
 
-.navbar-custom .navbar-nav .dropdown-menu>li>a:hover,
-.navbar-custom .navbar-nav .dropdown-menu>li>a:focus {
+.dropdown-menu > .active > a{
+    background-color: lightblue;
+}
+
+.bg-blue .navbar-nav .dropdown-menu>li>a:hover,
+.bg-blue .navbar-nav .dropdown-menu>li>a:focus {
     color: #33aa33;
 }
 
-.navbar-custom a {
+.bg-blue a,.bg-transparent a {
     color: whitesmoke;
 }
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+    color: #448aff;
+}
 
-.navbar-custom a:hover {
+.bg-blue a:hover,.bg-transparent a:hover{
     color: whitesmoke;
 }
 
 .wrap {
     min-height: 100%;
     height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
 }
 
 .wrap>.container {

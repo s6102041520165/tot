@@ -19,6 +19,10 @@ use yii\widgets\ListView;
     ]);
     ?>
 
+    <?php 
+    $detailButton = Html::a("ดูเพิ่มเติม...",['/news-content', 'id' => $model->id],['class' => 'btn btn-primary'])
+    ?>
+
     <?=
         ListView::widget([
             'dataProvider' => $dataProvider,
@@ -27,7 +31,7 @@ use yii\widgets\ListView;
             'itemView' => function ($model, $key, $index, $widget) {
                 return Html::a($model->title, ['/site/view', 'id' => $model->id]);
             },
-            'layout' => '{items} {pager}'
+            'layout' => '{items} <div style="margin:5px 0px">'.$detailButton.'</div>'
         ])
     ?>
 </div>

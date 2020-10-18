@@ -11,10 +11,16 @@ $this->title = 'แก้ไขข้อมูลส่วนตัว';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="panel panel-default">
         <div class="panel-body">
+            <?php //echo $model->picture
+            ?>
+            <?php if (isset($model->picture)) : ?>
+                <div class="flex-container">
+                    <img src="<?= Yii::getAlias('@web/') . $model->picture; ?>" alt="" class="avatar" />
+                </div>
+            <?php endif; ?>
             <?php $form = ActiveForm::begin(['id' => 'update-profile']); ?>
 
             <div class="row">
@@ -41,3 +47,19 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<?php 
+$css = <<<CSS
+    .flex-container{
+        display:flex;
+        justify-content:center;
+    }
+    .avatar {
+        vertical-align: middle;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin: 20px;
+    }
+CSS;
+?>
+<?= $this->registerCss($css) ?>

@@ -4,12 +4,12 @@ namespace frontend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\Activities;
+use frontend\models\NewsContent;
 
 /**
- * ActivitiesSearch represents the model behind the search form of `frontend\models\Activities`.
+ * NewsContentSearch represents the model behind the search form of `frontend\models\NewsContent`.
  */
-class ActivitiesSearch extends Activities
+class NewsContentSearch extends NewsContent
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class ActivitiesSearch extends Activities
     public function rules()
     {
         return [
-            [['id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['title', 'description', 'gallery'], 'safe'],
+            [['id', 'created_by', 'created_at', 'updated_by', 'updated_at', 'news_type_id'], 'integer'],
+            [['title', 'banner', 'content'], 'safe'],
         ];
     }
 
@@ -38,16 +38,16 @@ class ActivitiesSearch extends Activities
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $typeId)
     {
-        $query = Activities::find();
+        $query = NewsContent::find()->where(['=', 'news_type_id', $typeId]);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 20
+                'pageSize' =>20,
             ]
         ]);
 
@@ -62,15 +62,16 @@ class ActivitiesSearch extends Activities
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
+            'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
+            'updated_at' => $this->updated_at,
+            'news_type_id' => $this->news_type_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'gallery', $this->gallery]);
+            ->andFilterWhere(['like', 'banner', $this->banner])
+            ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

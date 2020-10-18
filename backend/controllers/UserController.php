@@ -130,7 +130,7 @@ class UserController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('ไม่สามารถเข้าถึงหน้าที่คุณร้องขอได้');
     }
 
     /**

@@ -24,7 +24,14 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <style>
-        *,p,table,h1,h2,h3,h4,h5{
+        *,
+        p,
+        table,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
             font-family: kanit;
         }
     </style>
@@ -33,32 +40,44 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
 
-    <div class="wrap">
+    <div id="wrapContent" class="wrap">
         <?php
         NavBar::begin([
             'brandLabel' => Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
-                'class' => 'navbar-custom navbar-fixed-top',
+                'id' => 'navbar'
             ],
         ]);
         $menuItems = [
             ['label' => 'หน้าแรก', 'url' => ['/site/index']],
             ['label' => 'เกี่ยวกับ', 'url' => ['/about']],
+            ['label' => 'กิจกรรม', 'url' => ['/activities']],
             ['label' => 'ติดต่อเรา', 'url' => ['/site/contact']],
         ];
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'ลงทะเบียน', 'url' => ['/site/signup']];
             $menuItems[] = ['label' => 'เข้าสู่ระบบ', 'url' => ['/site/login']];
         } else {
-            $menuItems[] = '<li>'
+            /* $menuItems[] = '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-danger logout']
                 )
                 . Html::endForm()
-                . '</li>';
+                . '</li>'; */
+            $menuItems[] = [
+                'label' => Yii::$app->user->identity->username,
+                'items' => [
+                    ['label' => 'แก้ไขข้อมูลส่วนตัว', 'url' => ['/site/update-profile']],
+                    '<li class="divider"></li>',
+                    [
+                        'label' => 'ออกจากระบบ', 'url' => ['/site/logout'],
+                        'linkOptions' => ['data-method' => 'post']
+                    ],
+                ],
+            ];
         }
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
@@ -67,12 +86,17 @@ AppAsset::register($this);
         NavBar::end();
         ?>
 
+        <div class="banner" id="banner">
+
+        </div>
         <div class="container">
+
             <div class="row">
                 <div class="col-lg-3">
                     <?= $this->render('left'); ?>
                 </div>
                 <div class="col-lg-9 animate-right">
+
                     <?= Breadcrumbs::widget([
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                     ]) ?>
@@ -87,10 +111,31 @@ AppAsset::register($this);
         <div class="container">
             <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 
-            <p class="pull-right">จัดทำโดยใคร <?=Html::a('BackYard', Yii::$app->urlManagerBackend->createUrl(['site/index']), $options = [])?></p>
+            <p class="pull-right">จัดทำโดยใคร <?= Html::a('BackYard', Yii::$app->urlManagerBackend->createUrl(['site/index']), $options = []) ?></p>
         </div>
     </footer>
+    <script>
+        window.onscroll = function() {
+            scrollFunction()
+        };
 
+
+        function scrollFunction() {
+            console.log(window.scrollY);
+            let banner = document.getElementById('banner');
+            let navbar = document.getElementById('navbar');
+            let wrap = document.getElementById('wrapContent');
+            if (window.scrollY > banner.clientHeight) {
+                console.log(window.scrollY);
+                navbar.className = 'bg-blue navbar-fixed-top';
+                wrap.style.margin = '0 auto 0px';
+               
+            } else {
+                navbar.className = 'bg-transparent navbar-fixed-top';
+                wrap.style.margin = '0 auto -60px';
+            }
+        }
+    </script>
     <?php $this->endBody() ?>
 </body>
 

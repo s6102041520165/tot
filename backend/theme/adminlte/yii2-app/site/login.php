@@ -50,7 +50,7 @@ $fieldOptions2 = [
     <!-- /.login-logo -->
     <div class="login-box-body">
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => true]); ?>
 
         <?= $form
             ->field($model, 'username', $fieldOptions1)
