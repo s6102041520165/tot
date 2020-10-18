@@ -40,7 +40,7 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
 
-    <div id="wrapContent" class="wrap">
+    <div id="wrapContent">
         <?php
         NavBar::begin([
             'brandLabel' => Yii::$app->name,
@@ -121,18 +121,16 @@ AppAsset::register($this);
 
 
         function scrollFunction() {
-            console.log(window.scrollY);
             let banner = document.getElementById('banner');
             let navbar = document.getElementById('navbar');
             let wrap = document.getElementById('wrapContent');
             if (window.scrollY > banner.clientHeight) {
-                console.log(window.scrollY);
                 navbar.className = 'bg-blue navbar-fixed-top';
-                wrap.style.margin = '0 auto 0px';
+                wrap.style.className = 'wrap';
                
             } else {
                 navbar.className = 'bg-transparent navbar-fixed-top';
-                wrap.style.margin = '0 auto -60px';
+                wrap.style.className = 'wrap';
             }
         }
     </script>
